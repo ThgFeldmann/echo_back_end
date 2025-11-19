@@ -62,7 +62,7 @@ ROOT_URLCONF = "echo_back_end.urls"
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGIN_REGEX = [
-    "http://localhost:3000/",
+    "https://echonetwork-ten.vercel.app/",
 ]
 
 TEMPLATES = [
