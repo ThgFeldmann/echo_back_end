@@ -4,9 +4,9 @@ from . import views
 
 urlpatterns = [
     # GET requests for data gathering
-    path('users/get', views.get_users_data),
+    path('users/get/', views.get_users_data),
     path('users/get/<int:pk>/', views.GetUserDataById.as_view()),
-    path('posts/get', views.get_posts_data),
+    path('posts/get/', views.get_posts_data),
     path('posts/get/<int:pk>/', views.GetPostDataById.as_view()),
     path('comments/get/', views.get_comments_data),
     path('follows/get/', views.get_follows_data),
