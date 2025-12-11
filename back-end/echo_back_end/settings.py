@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "psycopg2",
-    "psycopg2-binary",
     "gunicorn",
     "whitenoise",
 
