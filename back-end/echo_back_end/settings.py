@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-%ippe$+pra_a-&f6z=wqk6(*q@!%b#$nntx!6swr6#q5_cfk9c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app', 'https://echonetwork-ten.vercel.app/']
+ALLOWED_HOSTS = ['.vercel.app', 'https://echonetwork-ten.vercel.app/', "*"]
 
 # Application definition
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -93,7 +94,7 @@ DATABASES = {
             'NAME': 'railway',
             'USER': 'postgres',
             'PASSWORD': 'SRiVMudiIiOWGebosZrrfRRLQjTUwGiX',
-            'HOST': 'caboose.proxy.rlwy.net:30492',
+            'HOST': 'postgres.railway.internal',
             'PORT': '5432',
         }
     }
