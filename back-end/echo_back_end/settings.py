@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+
+from django.conf.global_settings import DATABASES
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     "psycopg2",
     "gunicorn",
     "whitenoise",
+    "dj_database_url",
 
     # apps
     "core",
@@ -96,7 +99,7 @@ DATABASES = {
             'NAME': 'railway',
             'USER': 'postgres',
             'PASSWORD': 'SRiVMudiIiOWGebosZrrfRRLQjTUwGiX',
-            'HOST': 'postgres.railway.internal',
+            'HOST': 'caboose.proxy.rlwy.net',
             'PORT': '5432',
         }
     }
