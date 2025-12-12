@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "psycopg2",
     "gunicorn",
     "whitenoise",
-    "dj_database_url",
 
     # apps
     "core",
