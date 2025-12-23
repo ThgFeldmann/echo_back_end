@@ -11,6 +11,9 @@ urlpatterns = [
     path('comments/get/', views.get_comments_data),
     path('follows/get/', views.get_follows_data),
 
+    # PATCH requests for data update
+    path('users/patch/password/<int:pk>', views.EditUserPassword.as_view()),
+
     # POST requests for data creation
     path('users/create/', views.create_user),
     path('posts/create/', views.create_post),

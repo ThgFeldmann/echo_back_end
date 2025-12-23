@@ -1,3 +1,4 @@
+from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -44,6 +45,22 @@ def get_follows_data(request):
     serializer = FollowSerializer(follows, many=True, read_only=True)
     return Response(serializer.data)
 
+# PATCH requests for data edit
+
+class EditUserPassword(APIView):
+    def patch(self, request, user_id):
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response({"error": "Item not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UserSerializer(user, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors.status=status.HTTP_400_BAD_REQUEST)
 # POST requests for data creation
 
 @api_view(['POST'])
