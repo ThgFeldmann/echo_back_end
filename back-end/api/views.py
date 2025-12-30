@@ -1,5 +1,9 @@
+from functools import partial
+
+from django.contrib.admin.utils import lookup_field
+from rest_framework.permissions import IsAdminUser
 from rest_framework.views import APIView
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -47,20 +51,11 @@ def get_follows_data(request):
 
 # PATCH requests for data edit
 
-class EditUserPassword(APIView):
-    def patch(self, request, user_id):
-        try:
-            user = User.objects.get(id=user_id)
-        except User.DoesNotExist:
-            return Response({"error": "Item not found"}, status=status.HTTP_404_NOT_FOUND)
+class EditUserPassword(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = ChangePasswordSerializer
+    lookup_field = 'pk'
 
-        serializer = UserSerializer(user, data=request.data, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 # POST requests for data creation
 
 @api_view(['POST'])

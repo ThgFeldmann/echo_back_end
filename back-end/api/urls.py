@@ -12,7 +12,7 @@ urlpatterns = [
     path('follows/get/', views.get_follows_data),
 
     # PATCH requests for data update
-    path('users/patch/password/<int:pk>', views.EditUserPassword.as_view()),
+    path('users/patch/password/<int:pk>/', views.EditUserPassword.as_view()),
 
     # POST requests for data creation
     path('users/create/', views.create_user),
