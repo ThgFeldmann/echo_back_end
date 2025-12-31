@@ -55,6 +55,7 @@ class EditUserPassword(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordSerializer
     lookup_field = 'pk'
+    http_method_names = ['get', 'put', 'patch', 'options']
 
 # POST requests for data creation
 
