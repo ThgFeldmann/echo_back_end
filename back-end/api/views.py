@@ -38,6 +38,17 @@ class GetPostDataById(RetrieveAPIView):
     lookup_field = 'pk'
 
 @api_view(['GET'])
+def get_likes_data(request):
+    likes = Like.objects.all()
+    serializer = LikeSerializer(likes, many=True)
+    return Response(serializer.data)
+
+class GetLikeDataById(RetrieveAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    lookup_field = 'pk'
+
+@api_view(['GET'])
 def get_comments_data(request):
     comments = Comment.objects.all()
     serializer = CommentSerializer(comments, many=True, read_only=True)
@@ -50,6 +61,24 @@ def get_follows_data(request):
     return Response(serializer.data)
 
 # PATCH requests for data edit
+
+class EditUserName(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = ChangeUsernameSerializer
+    lookup_field = 'pk'
+    http_method_names = ['get', 'put', 'patch', 'options']
+
+class EditUserImage(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = ChangeImageSerializer
+    lookup_field = 'pk'
+    http_method_names = ['get', 'put', 'patch', 'options']
+
+class EditUserBio(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = ChangeBioSerializer
+    lookup_field = 'pk'
+    http_method_names = ['get', 'put', 'patch', 'options']
 
 class EditUserPassword(UpdateAPIView):
     queryset = User.objects.all()
@@ -69,6 +98,13 @@ def create_user(request):
 @api_view(['POST'])
 def create_post(request):
     serializer = PostSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def create_like(request):
+    serializer = LikeSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
@@ -102,6 +138,13 @@ def delete_post(request, pk=None):
     post = queryset[0]
     post.delete()
     return Response("Post deleted", status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['DELETE', 'GET'])
+def delete_like(request, pk=None):
+    queryset = Like.objects.all().filter(pk=pk)
+    like = queryset[0]
+    like.delete()
+    return Response("Like deleted", status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['DELETE', 'GET'])
 def delete_comment(request, pk=None):
