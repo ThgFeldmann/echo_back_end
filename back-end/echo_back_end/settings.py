@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
-print(f"DEBUG_VALUE: {os.getenv('PGPASSWORD')}")
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -94,6 +93,7 @@ WSGI_APPLICATION = "echo_back_end.wsgi.app"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# database for production
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -105,6 +105,19 @@ DATABASES = {
         }
     }
 
+# database for running the production server locally
+#DATABASES = {
+        #'default': {
+            #'ENGINE': 'django.db.backends.postgresql',
+            #'NAME': 'railway',
+            #'USER': 'postgres',
+            #'PASSWORD': 'SRiVMudiIiOWGebosZrrfRRLQjTUwGiX',
+            #'HOST': 'postgres-production-2e32.up.railway.app',
+            #'PORT': '5432',
+        #}
+    #}
+
+# Database for development
 #DATABASES = {
     #"default": {
     #    "ENGINE": "django.db.backends.sqlite3",
