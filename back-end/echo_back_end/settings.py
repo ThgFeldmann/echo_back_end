@@ -94,28 +94,28 @@ WSGI_APPLICATION = "echo_back_end.wsgi.app"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # database for production
+#DATABASES = {
+        #'default': {
+        #    'ENGINE': 'django.db.backends.postgresql',
+        #    'NAME': os.getenv('PGDATABASE'),
+        #    'USER': os.getenv('PGUSER'),
+        #    'PASSWORD': os.getenv('PGPASSWORD'),
+        #    'HOST': os.getenv('PGHOST'),
+        #    'PORT': os.getenv('PGPORT'),
+        #}
+    #}
+
+# database for running the production server locally
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('PGDATABASE'),
-            'USER': os.getenv('PGUSER'),
-            'PASSWORD': os.getenv('PGPASSWORD'),
-            'HOST': os.getenv('PGHOST'),
-            'PORT': os.getenv('PGPORT'),
+            'NAME': 'railway',
+            'USER': 'postgres',
+            'PASSWORD': 'SRiVMudiIiOWGebosZrrfRRLQjTUwGiX',
+            'HOST': 'postgres.railway.internal',
+            'PORT': '5432',
         }
     }
-
-# database for running the production server locally
-#DATABASES = {
-        #'default': {
-            #'ENGINE': 'django.db.backends.postgresql',
-            #'NAME': 'railway',
-            #'USER': 'postgres',
-            #'PASSWORD': 'SRiVMudiIiOWGebosZrrfRRLQjTUwGiX',
-            #'HOST': 'postgres-production-2e32.up.railway.app',
-            #'PORT': '5432',
-        #}
-    #}
 
 # Database for development
 #DATABASES = {
