@@ -65,6 +65,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "echo_back_end.urls"
 
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "https://echonetwork-ten.vercel.app",
 
