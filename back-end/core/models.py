@@ -7,7 +7,7 @@ from django.contrib.postgres.fields import ArrayField
 class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=40)
-    email = models.EmailField(max_length=254)
+    email = models.EmailField(max_length=254, unique=True)
     bio = models.CharField(default="", max_length=120)
     image = models.CharField(default="", blank=True, null=False)
 
