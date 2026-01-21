@@ -2,6 +2,7 @@ from functools import partial
 
 from django.contrib.admin.utils import lookup_field
 from rest_framework.permissions import IsAdminUser
+from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView, UpdateAPIView
 from rest_framework.response import Response
@@ -107,7 +108,7 @@ def create_like(request):
     serializer = LikeSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+    return Response(serializer.data, status=HTTP_201_CREATED)
 
 @api_view(['POST'])
 def create_comment(request):
