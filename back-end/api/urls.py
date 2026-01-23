@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     # GET requests for data gathering
     path('users/get/', views.get_users_data),
+    path('users/get/login/', views.UserLogin.as_view()),
     path('users/get/<int:pk>/', views.GetUserDataById.as_view()),
     path('posts/get/', views.get_posts_data),
     path('posts/get/<int:pk>/', views.GetPostDataById.as_view()),

@@ -10,6 +10,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
 
+class UserLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'password']
+
 class ChangeUsernameSerializer(serializers.ModelSerializer):
     username = serializers.CharField(write_only=True, required=True)
 

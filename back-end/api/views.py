@@ -25,6 +25,22 @@ class GetUserDataById(RetrieveAPIView):
     serializer_class = UserSerializer
     lookup_field = 'pk'
 
+class UserLogin(APIView):
+    def post(self, request):
+        serializer = UserLoginSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+
+            try
+                user = User.objects.get(email=email, password=password)
+
+                return Response({user}, status=status.HTTP_200_OK)
+            except User.DoesNotExist:
+                return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
 @api_view(['GET'])
 def get_posts_data(request):
     # error in this function
