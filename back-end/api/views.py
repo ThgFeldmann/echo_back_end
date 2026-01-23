@@ -32,7 +32,7 @@ class UserLogin(APIView):
             email = serializer.validated_data['email']
             password = serializer.validated_data['password']
 
-            try
+            try:
                 user = User.objects.get(email=email, password=password)
 
                 return Response({user}, status=status.HTTP_200_OK)
