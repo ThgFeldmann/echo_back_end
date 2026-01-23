@@ -3,6 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('ping/', views.PingDatabase.as_view()),
+
     # GET requests for data gathering
     path('users/get/', views.get_users_data),
     path('users/get/login/', views.UserLogin.as_view()),

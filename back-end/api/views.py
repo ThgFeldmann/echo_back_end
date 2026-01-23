@@ -1,5 +1,6 @@
 from functools import partial
 
+from djang.db import connections
 from django.contrib.admin.utils import lookup_field
 from rest_framework.permissions import IsAdminUser
 from rest_framework.status import HTTP_201_CREATED
@@ -10,6 +11,14 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 from .serializers import *
+
+class PingDatabase(APIView):
+    def get(self, request, *args, **kwargs):
+        try:
+            connections['default'].cursor()
+            return Response({"status": "database connected"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"status": "database disconnected", "error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # GET requests for data
 
