@@ -1,6 +1,6 @@
 from functools import partial
 
-from djang.db import connections
+from django.db import connections
 from django.contrib.admin.utils import lookup_field
 from rest_framework.permissions import IsAdminUser
 from rest_framework.status import HTTP_201_CREATED
