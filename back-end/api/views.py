@@ -30,21 +30,42 @@ class GetUserDataById(RetrieveAPIView):
     serializer_class = UserSerializer
     lookup_field = 'pk'
 
+# Will test the new function, if ok, will remove this
+#class UserLogin(APIView):
+    #def post(self, request):
+        #serializer = UserLoginSerializer(data=request.data)
+        #if serializer.is_valid():
+        #    email = serializer.validated_data['email']
+        #    password = serializer.validated_data['password']
+        #
+        #   try:
+        #       user = User.objects.filter(email=email, password=password).first()
+        #       user_serializer = UserSerializer(user)
+        #
+        #       return Response(user_serializer.data, status=status.HTTP_200_OK)
+        #   except User.DoesNotExist:
+        #       return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+
+# new function | test
 class UserLogin(APIView):
     def post(self, request):
         serializer = UserLoginSerializer(data=request.data)
-        if serializer.is_valid():
-            email = serializer.validated_data['email']
-            password = serializer.validated_data['password']
 
-            try:
-                user = User.objects.get(email=email, password=password)
-                user_serializer = UserSerializer(user)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-                return Response(user_serializer.data, status=status.HTTP_200_OK)
-            except User.DoesNotExist:
-                return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
+        email = serializer.validated_data["email"]
+        password = serializer.validated_data["password"]
 
+        user = User.objects.filter(email=email, password=password).first()
+
+        if user is None:
+            return Response(
+                {"error": "Invalid email or password"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return Response(UserSerializer(user).data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
