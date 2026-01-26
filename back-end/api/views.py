@@ -54,8 +54,8 @@ class UserLogin(APIView):
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        email = serializer.validated_data["email"]
-        password = serializer.validated_data["password"]
+        email = serializer.validated_data["email"].strip().lower()
+        password = serializer.validated_data["password"].strip()
 
         try:
             user = User.objects.get(email=email, password=password)
