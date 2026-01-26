@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('ping/', views.PingDatabase.as_view()),
+    path('ping/', views.ping_server),
 
     # GET requests for data gathering
     path('users/get/', views.get_users_data),

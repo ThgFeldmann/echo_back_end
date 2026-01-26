@@ -1,24 +1,20 @@
 from functools import partial
 
-from django.db import connections
 from django.contrib.admin.utils import lookup_field
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView, UpdateAPIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 
 from .serializers import *
 
-class PingDatabase(APIView):
-    def get(self, request, *args, **kwargs):
-        try:
-            connections['default'].cursor()
-            return Response({"status": "database connected"}, status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response({"status": "database disconnected", "error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def ping_server(request):
+    return Response({"status": "ok"}, status=status.HTTP_200_OK)
 
 # GET requests for data
 
