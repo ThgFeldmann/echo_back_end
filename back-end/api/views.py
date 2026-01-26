@@ -39,8 +39,9 @@ class UserLogin(APIView):
 
             try:
                 user = User.objects.get(email=email, password=password)
+                user_serializer = UserSerializer(user)
 
-                return Response({user}, status=status.HTTP_200_OK)
+                return Response(user_serializer.data, status=status.HTTP_200_OK)
             except User.DoesNotExist:
                 return Response({"error": "Invalid email or password"}, status=status.HTTP_400_BAD_REQUEST)
 
