@@ -57,9 +57,9 @@ class UserLogin(APIView):
         email = serializer.validated_data["email"]
         password = serializer.validated_data["password"]
 
-        user = User.objects.filter(email=email, password=password).first()
-
-        if user is None:
+        try:
+            user = User.objects.get(email=email, password=password)
+        except User.DoesNotExist:
             return Response(
                 {"error": "Invalid email or password"},
                 status=status.HTTP_400_BAD_REQUEST
