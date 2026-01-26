@@ -1,6 +1,7 @@
 from functools import partial
 
 from django.contrib.admin.utils import lookup_field
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
@@ -184,7 +185,6 @@ def delete_comment(request, pk=None):
 
 @api_view(['DELETE', 'GET'])
 def delete_follow(request, pk=None):
-    queryset = Follow.objects.all().filter(pk=pk)
-    follow = queryset[0]
+    follow = get_object_or_404(Follow, pk=pk)
     follow.delete()
-    return Response("Follow deleted", status=status.HTTP_204_NO_CONTENT)
+    return Response(status=status.HTTP_204_NO_CONTENT)
